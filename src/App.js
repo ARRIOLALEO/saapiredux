@@ -7,12 +7,12 @@ import Pagination from "react-bootstrap-4-pagination";
 
 function App() {
   const dispatch = useDispatch();
-  const photos = useSelector((state) => state.gallery.photos);
-
+  //const photos = useSelector((state) => state.gallery.photos);
+const photos = []
   useEffect(() => {
     dispatch(getPhotos());
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch]);
+  }, []);
 
   const [pageNumber, setPageNumber] = useState(0);
   const picsPerPage = 10;

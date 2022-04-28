@@ -1,12 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-export const getPhotos = createAsyncThunk("photos/getPhotos", async () => {
-  const response = await fetch(
-    "https://elephant-api.herokuapp.com/elephants"
-  );
-  const formattedResponse = response.json();
-  return formattedResponse;
-});
 
+export const getPhotos = createAsyncThunk('api/gallery',async(obj,{state,error})=>{
+  const response = await fetch(
+    "https://fakestoreapi.com/products"
+  );
+  
+  const formattedResponse = await response.json();
+  console.log(formattedResponse)
+  return formattedResponse;
+})  
 export const gallerySlice = createSlice({
   name: "gallery",
   initialState: {
@@ -14,9 +16,6 @@ export const gallerySlice = createSlice({
     isLoading: false,
   },
   extraReducers: {
-    [getPhotos.pending]: (state) => {
-      state.isLoading = true;
-    },
     [getPhotos.fulfilled]: (state, action) => {
       state.photos = action.payload;
       state.isLoading = false;
@@ -26,4 +25,5 @@ export const gallerySlice = createSlice({
     },
   },
 });
-export default gallerySlice.reducer;
+export const actions = gallerySlice.actions;
+export default gallerySlice;
